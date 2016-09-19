@@ -15,6 +15,11 @@ class GeoHelper
     const ON_DEGREE = 111;
 
     /**
+     * До какого знака после запятой округлять координаты.
+     */
+    const ROUND_PRECISION = 6;
+
+    /**
      * Количество сторон вписываемого в окружность многоугольника (значение по умолчанию).
      */
     const EDGES = 36;
@@ -30,7 +35,9 @@ class GeoHelper
      */
     static public function createInscribedPolygon(float $lat, float $lon, float $radius, int $edges = self::EDGES)
     {
+        // перевод расстояния в километры
         $radius  = $radius / 1000;
+
         $polygon = [];
 
         for ($i = 0; $i <= $edges; $i++) {
@@ -39,8 +46,8 @@ class GeoHelper
             $x = $radius * cos($i * $degree);
             $y = $radius * sin($i * $degree);
 
-            $nLat = round($lat + $x / self::ON_DEGREE, 6);
-            $nLon = round($lon + $y / abs(cos($lat * M_PI / 180) * self::ON_DEGREE), 6);
+            $nLat = round($lat + $x / self::ON_DEGREE, self::ROUND_PRECISION);
+            $nLon = round($lon + $y / abs(cos($lat * M_PI / 180) * self::ON_DEGREE), self::ROUND_PRECISION);
 
             $polygon[] = [$nLat, $nLon];
         }
