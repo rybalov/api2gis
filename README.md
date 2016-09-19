@@ -11,7 +11,6 @@
 
 > jQuery 3.0, Bootstrap 4.0, Angular 2.0.
 
-----------
 
 ## Развертывание справочника
 
@@ -111,9 +110,8 @@
 
     php bin/console server:run
     
-----------
 
-### Документация по API
+## Документация по API
 
 Документация по API доступна по ссылке: [https://2gis.rybalov.work/doc/api](https://2gis.rybalov.work/doc/api).
 
