@@ -735,7 +735,7 @@ margin-bottom: 20px;
       "type" : "array",
       "description" : "Список адресов",
       "items" : {
-        "$ref" : "#/definitions/Address"
+        "$ref" : "#/definitions/BuildingAddress"
       }
     },
     "lat" : {
@@ -745,6 +745,26 @@ margin-bottom: 20px;
     "lon" : {
       "type" : "number",
       "description" : "Долгота"
+    }
+  }
+};
+  defs.BuildingAddress = {
+  "properties" : {
+    "city" : {
+      "type" : "string",
+      "description" : "Город"
+    },
+    "street" : {
+      "type" : "string",
+      "description" : "Улица"
+    },
+    "house" : {
+      "type" : "string",
+      "description" : "Дом"
+    },
+    "postcode" : {
+      "type" : "string",
+      "description" : "Почтовый индек"
     }
   }
 };
@@ -860,7 +880,8 @@ margin-bottom: 20px;
       "type" : "string"
     },
     "error_code" : {
-      "type" : "string"
+      "type" : "string",
+      "enum" : [ "incorrectRequest", "withoutResult", "" ]
     }
   }
 };
@@ -3509,6 +3530,13 @@ try {
           "features" : [ {
             "lat" : 56.451304,
             "lon" : 84.975685
+          } ],
+          "contacts" : [ {
+            "email" : "dtv@rde.ru"
+          }, {
+            "phone" : "+7 913 00 45 98"
+          }, {
+            "phone" : "www.bis-info.io"
           } ]
         }
       } ]
@@ -3552,7 +3580,7 @@ try {
 
 
                                                         <div class="tab-pane" id="examples-SearchCompanies-searchCompanies-example">
-                                                            <pre class="prettyprint"><code class="json">{response_code&#x3D;200, result&#x3D;[{id&#x3D;539, name&#x3D;БИС-Инфо, ООО, региональное информационное агентство, address&#x3D;{city&#x3D;Томск, street&#x3D;19 Гвардейской Дивизии, house&#x3D;11/1, postcode&#x3D;634045, features&#x3D;[{lat&#x3D;56.451304, lon&#x3D;84.975685}]}}]}</code></pre>
+                                                            <pre class="prettyprint"><code class="json">{response_code&#x3D;200, result&#x3D;[{id&#x3D;539, name&#x3D;БИС-Инфо, ООО, региональное информационное агентство, address&#x3D;{city&#x3D;Томск, street&#x3D;19 Гвардейской Дивизии, house&#x3D;11/1, postcode&#x3D;634045, features&#x3D;[{lat&#x3D;56.451304, lon&#x3D;84.975685}], contacts&#x3D;[{email&#x3D;dtv@rde.ru}, {phone&#x3D;+7 913 00 45 98}, {phone&#x3D;www.bis-info.io}]}}]}</code></pre>
                                                         </div>
 
 
@@ -3874,7 +3902,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-19T11:02:15.223Z
+                    Generated 2016-09-19T17:40:29.950Z
                 </div>
             </div>
         </div>
