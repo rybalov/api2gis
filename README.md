@@ -55,8 +55,8 @@
     rm -rf var/logs/*
 
     HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-    sudo chmod -R +a "$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs
-    sudo chmod -R +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs
+    sudo chmod -R a+w "$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs var/sessions
+    sudo chmod -R a+w "`whoami` allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs var/sessions
 
 5) Проверить системные требования
 ----------------------------------
