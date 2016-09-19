@@ -394,6 +394,17 @@
                           "lat": 56.451304,
                           "lon": 84.975685
                         }
+                      ],
+                      "contacts": [
+                        {
+                          "email": "dtv@rde.ru"
+                        },
+                        {
+                          "phone": "+7 913 00 45 98"
+                        },
+                        {
+                          "phone": "www.bis-info.io"
+                        }
                       ]
                     }
                   }
@@ -496,7 +507,7 @@
           "type": "array",
           "description": "Список адресов",
           "items": {
-            "$ref": "#/definitions/Address"
+            "$ref": "#/definitions/BuildingAddress"
           }
         },
         "lat": {
@@ -533,6 +544,26 @@
           "items": {
             "$ref": "#/definitions/Point"
           }
+        }
+      }
+    },
+    "BuildingAddress": {
+      "properties": {
+        "city": {
+          "description": "Город",
+          "type": "string"
+        },
+        "street": {
+          "description": "Улица",
+          "type": "string"
+        },
+        "house": {
+          "description": "Дом",
+          "type": "string"
+        },
+        "postcode": {
+          "description": "Почтовый индек",
+          "type": "string"
         }
       }
     },
@@ -615,7 +646,12 @@
           "type": "string"
         },
         "error_code": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "incorrectRequest",
+            "withoutResult",
+            ""
+          ]
         }
       }
     }

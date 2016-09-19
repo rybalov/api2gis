@@ -18,7 +18,7 @@
 
 #### 1) Склонировать проект из репозитория:
 
-    git clone git@bitbucket.org:rybalov/2gis.git
+    git clone git@github.com:rybalov/api2gis.git
 
 #### 2) Установить все зависимости (библиотеки) Symfony с помощью [composer](http://getcomposer.org):
 
@@ -92,7 +92,7 @@
 
 ##### Копирование ресурсов (js/css/images) в web root
 
-Клиентские js-скрипты, стили, картинки необходимо пробросить web root: 
+Клиентские js-скрипты, стили, картинки необходимо пробросить в web root: 
 
     php bin/console assets:install --symlink
 
