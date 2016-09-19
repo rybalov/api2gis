@@ -1,0 +1,13 @@
+services:
+    kernel.listener.api_exception_listener:
+        arguments: ["@kernel"]
+        class: ApiBundle\EventListener\APIExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    gedmo.listener.tree:
+        class: Gedmo\Tree\TreeListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]

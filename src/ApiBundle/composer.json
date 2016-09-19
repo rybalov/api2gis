@@ -1,0 +1,32 @@
+{
+  "name": "rybalov/api2gis-bundle",
+  "description": "This Bundle provides various functionality to use simplified version of 2gis service.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nikita Rybalov",
+      "email": "nikita.rybalov@gmail.com"
+    }
+  ],
+  "keywords": [
+    "api",
+    "spatial",
+    "2gis",
+    "gis",
+    "map"
+  ],
+  "support": {
+    "source": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "Rybalov\\ApiBundle\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.0.0",
+    "creof/doctrine2-spatial": "^1.1",
+    "jms/serializer-bundle": "^1.1",
+    "gedmo/doctrine-extensions": "^2.4"
+  }
+}

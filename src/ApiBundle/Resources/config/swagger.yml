@@ -1,0 +1,456 @@
+swagger: '2.0'
+info:
+  title: Обзор API доступа к справочнику 2ГИС
+  description: Описание API в формате Swagger
+  version: v1
+host: 2gis.rybalov.work
+schemes:
+  - https
+basePath: /api
+tags:
+  - name: searchBuildings
+    description: Получение списка всех зданий с постраничным выводом
+  - name: searchCategories
+    description: Получение списка всех рубрик
+  - name: searchCompanies
+    description: Поиск фирм по различным критериям
+produces:
+  - application/json
+paths:
+  /search/buildings:
+    get:
+      tags:
+        - searchBuildings
+      summary: Здания
+      description: |
+        Получение списка всех зданий с постраничным выводом
+      operationId: searchBuildings
+      parameters:
+        - name: type
+          in: query
+          description: Тип запроса
+          required: true
+          type: string
+          enum: ["all", "street"]
+        - name: street
+          in: query
+          description: Строка поиска (по названию улицы). Обязательно в случае, когда type=street
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Номер странцы при постраничном выводе.
+          required: false
+          type: number
+        - name: pagesize
+          in: query
+          description: Размер странцы при постраничном выводе.
+          required: false
+          type: number
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/BuildingsResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 200,
+                "result": [
+                  {
+                    "addresses": [
+                      {
+                        "city": "Томск",
+                        "street": "19 Гвардейской Дивизии",
+                        "house": "11/1",
+                        "postcode": "634045"
+                      }
+                    ],
+                    "lat": 56.451304,
+                    "lon": 84.975685
+                  }
+                ]
+              }
+        '400':
+          description: Ошибка в параметрах запроса
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 400,
+                "error_message": "",
+                "error_code": "incorrectRequest"
+              }
+        '404':
+          description: Поиск не вернул результатов
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 404,
+                "error_message": "",
+                "error_code": "withoutResult"
+              }
+        '500':
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 500,
+                "error_message": "Intenal error",
+                "error_code": ""
+              }
+
+  /search/categories:
+    get:
+      tags:
+        - searchCategories
+      summary: Категории
+      description: |
+        Получение списка всех рубрик
+      operationId: searchCategories
+      parameters:
+        - name: type
+          in: query
+          description: Тип запроса
+          required: true
+          type: string
+          enum: ["all", "name"]
+        - name: name
+          in: query
+          description: Строка поиска (по названию рубрики). Обязательно в случае, когда type=name
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Номер странцы при постраничном выводе.
+          required: false
+          type: number
+        - name: pagesize
+          in: query
+          description: Размер странцы при постраничном выводе.
+          required: false
+          type: number
+      responses:
+        '200':
+          description: Список рубрик
+          schema:
+            $ref: '#/definitions/CategoriesResponse'
+          examples:
+            application/json:
+              {
+                "response_code": 200,
+                "result": [
+                  {
+                    "id": 1,
+                    "name": "Аварийные",
+                    "lvl": 1
+                  },
+                  {
+                    "id": 51,
+                    "name": "Справочные",
+                    "lvl": 2
+                  }
+                ]
+              }
+        '400':
+          description: Ошибка в параметрах запроса
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 400,
+                "error_message": "",
+                "error_code": "incorrectRequest"
+              }
+        '404':
+          description: Поиск не вернул результатов
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 404,
+                "error_message": "",
+                "error_code": "withoutResult"
+              }
+        '500':
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 500,
+                "error_message": "Intenal error",
+                "error_code": ""
+              }
+
+  /search/companies:
+    get:
+      tags:
+        - searchCompanies
+      summary: Компании
+      description: |
+        Поиск фирм по различным критериям
+      operationId: searchCompanies
+      parameters:
+        - name: type
+          in: query
+          description: Тип запроса
+          required: true
+          type: string
+          enum: ["all", "name", "id", "address", "category", "radius", "bound"]
+        - name: id
+          in: query
+          description: Идентификатор компании. Обязательно в случае, когда type=id
+          type: number
+        - name: name
+          in: query
+          description: Строка поиска (по названию рубрики). Обязательно в случае, когда type=name
+          type: string
+        - name: city
+          in: query
+          description: Город. Обязательно в случае, когда type=address
+          type: string
+        - name: street
+          in: query
+          description: Улица. Обязательно в случае, когда type=address
+          type: string
+        - name: house
+          in: query
+          description: Дом. Обязательно в случае, когда type=address
+          type: string
+        - name: category
+          in: query
+          description: Идентификатор рубрики. Обязательно в случае, когда type=category
+          type: number
+        - name: nested
+          in: query
+          description: Искать в подкатегориях. Используется совместно с полем category
+          required: false
+          type: number
+        - name: lat
+          in: query
+          description: Широта при поиске по радиусу. Обязательно в случае, когда type=radius
+          type: number
+        - name: lon
+          in: query
+          description: Долгота при поиске по радиусу. Обязательно в случае, когда type=radius
+          type: number
+        - name: radius
+          in: query
+          description: Искать компании в заданном радиусе (в метрах). Обязательно в случае, когда type=radius
+          type: number
+        - name: bound[lat1]
+          in: query
+          description: Широта (перва координата) при поиске в заданном прямоугольнике. Обязательно в случае, когда type=bound
+          type: number
+        - name: bound[lon1]
+          in: query
+          description: Долгота (первая координата) при поиске в заданном прямоугольнике. Обязательно в случае, когда type=bound
+          type: number
+        - name: bound[lat2]
+          in: query
+          description: Широта (вторая координата) при поиске в заданном прямоугольнике. Обязательно в случае, когда type=bound
+          type: number
+        - name: bound[lon2]
+          in: query
+          description: Долгота (вторая координата) при поиске в заданном прямоугольнике. Обязательно в случае, когда type=bound
+          type: number
+        - name: page
+          in: query
+          description: Номер странцы при постраничном выводе.
+          required: false
+          type: number
+        - name: pagesize
+          in: query
+          description: Размер странцы при постраничном выводе.
+          required: false
+          type: number
+      responses:
+        '200':
+          description: Список компаний
+          schema:
+            $ref: '#/definitions/CompaniesResponse'
+          examples:
+            application/json:
+              {
+                "response_code": 200,
+                "result": [
+                  {
+                    "id": 539,
+                    "name": "БИС-Инфо, ООО, региональное информационное агентство",
+                    "address": {
+                      "city": "Томск",
+                      "street": "19 Гвардейской Дивизии",
+                      "house": "11/1",
+                      "postcode": "634045",
+                      "features": [
+                        {
+                          "lat": 56.451304,
+                          "lon": 84.975685
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+        '400':
+          description: Ошибка в параметрах запроса
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 400,
+                "error_message": "",
+                "error_code": "incorrectRequest"
+              }
+        '404':
+          description: Поиск не вернул результатов
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 404,
+                "error_message": "",
+                "error_code": "withoutResult"
+              }
+        '500':
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+             application/json:
+              {
+                "response_code": 500,
+                "error_message": "Intenal error",
+                "error_code": ""
+              }
+
+definitions:
+  BuildingsResponse:
+    properties:
+      response_code:
+        type: number
+        description: Статус ответа
+      result:
+        type: array
+        description: Список зданий
+        items:
+          $ref: '#/definitions/Building'
+  CategoriesResponse:
+    properties:
+      response_code:
+        type: number
+        description: Статус ответа
+      result:
+        type: array
+        description: Список категорий
+        items:
+          $ref: '#/definitions/Category'
+  CompaniesResponse:
+    properties:
+      response_code:
+        type: number
+        description: Статус ответа
+      result:
+        type: array
+        description: Список компаний
+        items:
+          $ref: '#/definitions/Company'
+  Building:
+    properties:
+      addresses:
+        type: array
+        description: Список адресов
+        items:
+          $ref: '#/definitions/Address'
+      lat:
+        description: Широта
+        type: number
+      lon:
+        description: Долгота
+        type: number
+  Address:
+    properties:
+      city:
+        description: Город
+        type: string
+      street:
+        description: Улица
+        type: string
+      house:
+        description: Дом
+        type: string
+      postcode:
+        description: Почтовый индек
+        type: string
+      features:
+        description: Список объектов, привязанных к зданиям
+        type: array
+        items:
+          $ref: '#/definitions/Point'
+  Company:
+    properties:
+      id:
+        type: number
+        description: ID компании
+      name:
+        type: string
+        description: Название компании
+      contacts:
+        type: array
+        description: Список контактов
+        items:
+          $ref: '#/definitions/Contact'
+      address:
+        $ref: '#/definitions/Address'
+  Point:
+    properties:
+      lat:
+        description: Широта
+        type: number
+      lon:
+        description: Долгота
+        type: number
+  Contact:
+    properties:
+      type:
+        description: Тип контакта
+        type: string
+      phone:
+        description: Телефон
+        type: string
+      site:
+        description: Сайт
+        type: string
+      email:
+        description: E-mail
+        type: string
+  Category:
+    properties:
+      id:
+        type: number
+        description: ID категории
+      name:
+        description: Название категории
+        type: string
+      lvl:
+        description: Уровень вложенности категории (уровень в иерархии)
+        type: number
+  ErrorResponse:
+    properties:
+      response_code:
+        type: number
+      error_message:
+        type: string
+      error_code:
+        type: string

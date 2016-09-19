@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Справочник 2ГИС</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="//fonts.googleapis.com/css?family=Istok+Web:400,700&subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/style.css') }}">
+    <!-- Polyfills -->
+    <script src="{{ asset('bundles/app/js/node_modules/core-js/client/shim.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/node_modules/zone.js/dist/zone.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/node_modules/reflect-metadata/Reflect.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/node_modules/systemjs/dist/system.src.js') }}"></script>
+    <!-- -->
+    <script src="{{ asset('bundles/app/js/systemjs.config.js') }}"></script>
+</head>
+<body>
+<gis-panel></gis-panel>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<script src="//maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+<script>
+    System.import('app').catch(function(err){ console.error(err); });
+</script>
+</body>
+</html>
