@@ -117,9 +117,9 @@
 
 ### Документация по API
 
-Документация по API доступна по ссылке: [https://2gis.rybalov.work/api-doc](https://2gis.rybalov.work/api-doc).
+Документация по API доступна по ссылке: [https://2gis.rybalov.work/doc/api](https://2gis.rybalov.work/doc/api).
 
-В формате Swagger: [https://2gis.rybalov.work/api-doc/swagger.json](https://2gis.rybalov.work/api-doc/swagger.json).
+В формате Swagger: [https://2gis.rybalov.work/doc/api/swagger.json](https://2gis.rybalov.work/doc/api/swagger.json).
 
 Сервис для тестирования API: http://petstore.swagger.io
 > Подробнее о Swagger: http://swagger.io.
