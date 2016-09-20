@@ -153,7 +153,8 @@ paths:
                   {
                     "id": 51,
                     "name": "Справочные",
-                    "lvl": 2
+                    "lvl": 2,
+                    "parent_id": 1
                   }
                 ]
               }
@@ -470,6 +471,9 @@ definitions:
         type: string
       lvl:
         description: Уровень вложенности категории (уровень в иерархии)
+        type: number
+      parent_id:
+        description: Родительская категория
         type: number
   ErrorResponse:
     properties:

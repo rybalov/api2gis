@@ -811,6 +811,10 @@ margin-bottom: 20px;
     "lvl" : {
       "type" : "number",
       "description" : "Уровень вложенности категории (уровень в иерархии)"
+    },
+    "parent_id" : {
+      "type" : "number",
+      "description" : "Родительская категория"
     }
   }
 };
@@ -2210,7 +2214,8 @@ try {
       }, {
         "id" : 51,
         "name" : "Справочные",
-        "lvl" : 2
+        "lvl" : 2,
+        "parent_id" : 1
       } ]
     }
   }
@@ -2252,7 +2257,7 @@ try {
 
 
                                                         <div class="tab-pane" id="examples-SearchCategories-searchCategories-example">
-                                                            <pre class="prettyprint"><code class="json">{response_code&#x3D;200, result&#x3D;[{id&#x3D;1, name&#x3D;Аварийные, lvl&#x3D;1}, {id&#x3D;51, name&#x3D;Справочные, lvl&#x3D;2}]}</code></pre>
+                                                            <pre class="prettyprint"><code class="json">{response_code&#x3D;200, result&#x3D;[{id&#x3D;1, name&#x3D;Аварийные, lvl&#x3D;1}, {id&#x3D;51, name&#x3D;Справочные, lvl&#x3D;2, parent_id&#x3D;1}]}</code></pre>
                                                         </div>
 
 
@@ -3902,7 +3907,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-19T17:40:29.950Z
+                    Generated 2016-09-20T05:10:13.317Z
                 </div>
             </div>
         </div>
