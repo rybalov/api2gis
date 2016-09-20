@@ -297,4 +297,19 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"categories"})
+     *
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        if ($this->getParentCategory()) {
+            return $this->getParentCategory()->getId();
+        }
+
+        return null;
+    }
 }

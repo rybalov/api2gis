@@ -31,7 +31,7 @@ trait APIResponsible
         $response['result'] = $result;
         $response['response_code'] = Response::HTTP_OK;
 
-        $context        = SerializationContext::create()->setGroups($serializationContext);
+        $context        = $serializationContext? SerializationContext::create()->setGroups($serializationContext): null;
         $responseData   = $serializer->serialize($response, 'json', $context);
 
         return new Response($responseData, Response::HTTP_OK, ['Content-Type' => 'application/json']);
